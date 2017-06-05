@@ -1,0 +1,16 @@
+﻿@using NaSpacerDo.ViewModels
+@model EditCompanyViewModel
+
+@Html.AntiForgeryToken()
+
+<h4>Company</h4>
+<hr />
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Company.LongDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextAreaFor(model => model.Company.LongDescription, new { id = "long_description", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Company.LongDescription, "", new { @class = "text-danger" })
+    </div>
+</div>

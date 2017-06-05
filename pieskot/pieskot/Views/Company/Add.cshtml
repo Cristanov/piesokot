@@ -1,0 +1,109 @@
+﻿@model NaSpacerDo.ViewModels.AddCompanyViewModel
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/fileExtensionsValidator")
+@Scripts.Render("~/bundles/addCompany")
+
+<h2>Company add</h2>
+<div class="col-md-6">
+    @using (Html.BeginForm("Add", "Company", FormMethod.Post, new { @enctype = "multipart/form-data", id = "add_company_form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Company</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Company.Name, new { htmlAttributes = new { @class = "form-control", id = "company_name" } })
+                    @Html.ValidationMessageFor(model => model.Company.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Company.Email, new { htmlAttributes = new { @class = "form-control", id = "company_email" } })
+                    @Html.ValidationMessageFor(model => model.Company.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Company.Phone, new { htmlAttributes = new { @class = "form-control", id = "company_phone" } })
+                    @Html.ValidationMessageFor(model => model.Company.Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company.Www, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Company.Www, new { htmlAttributes = new { @class = "form-control", id = "company_www" } })
+                    @Html.ValidationMessageFor(model => model.Company.Www, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company.ShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Company.ShortDescription, new { htmlAttributes = new { @class = "form-control", id = "company_short_description" } })
+                    @Html.ValidationMessageFor(model => model.Company.ShortDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company.Address.City.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Company.Address.City.Name, new { htmlAttributes = new { @class = "form-control", id = "company_address_city" } })
+                    @Html.ValidationMessageFor(model => model.Company.Address.City.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company.Address.Street, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Company.Address.Street, new { htmlAttributes = new { @class = "form-control", id = "company_address_street" } })
+                    @Html.ValidationMessageFor(model => model.Company.Address.Street, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company.Address.Number, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Company.Address.Number, new { htmlAttributes = new { @class = "form-control", id = "company_address_number" } })
+                    @Html.ValidationMessageFor(model => model.Company.Address.Number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company.Address.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Company.Address.ZipCode, new { htmlAttributes = new { @class = "form-control", id = "company_address_zip_code" } })
+                    @Html.ValidationMessageFor(model => model.Company.Address.ZipCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company.Logo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-primary btn-file">
+                                Przeglądaj&hellip; <input type="file" name="Company.Logo.Image" id="company_logo_path">
+                            </span>
+                        </span>
+                        @Html.TextBoxFor(x => x.Company.Logo.FileName, new { id = "logo_path_input", @class = "form-control", @readonly = true, @novalidate = "novalidate" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Company.Logo.FileName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" id="save_company" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="col-md-12">
+    @Html.ActionLink("Back to List", "Index")
+</div>

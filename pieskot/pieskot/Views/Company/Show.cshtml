@@ -1,0 +1,134 @@
+﻿@model NaSpacerDo.ViewModels.CompanyViewModel
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/flexslider")
+<h2>Show</h2>
+<div>
+    @Html.Hidden("company_id", Model.Id, new { id = "company_id" })
+    @Html.Hidden("average_company_rate", Model.AverageRate, new { id = "average_company_rate" })
+    <h4>Company</h4>
+    <hr />
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Name }, new { id = "edit_company" })
+    <br />
+    @if (Model.Logo?.Path != null)
+    {
+        <img src="@Model.Logo.Path" style="height: 300px; width:300px;" id="company_logo" />
+    }
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.Www)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Www)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.Address.City.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address.City.Name)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.Address.Street)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address.Street)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.Address.Number)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address.Number)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.Address.ZipCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address.ZipCode)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.ShortDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.LongDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LongDescription)
+        </dd>
+    </dl>
+</div>
+<h3>Rating</h3>
+<div id="jRate"></div>
+<!-- Place somewhere in the <body> of your page -->
+<div class="flexslider">
+    <ul class="slides">
+        @foreach (var img in Model.Images)
+        {
+            <li>
+                <img src="@img.Path" />
+            </li>
+        }
+    </ul>
+</div>
+<div>
+
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+         */
+
+
+
+        (function () {  // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//piesokot.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+        var disqus_config = function () {
+            //this.page.url = 'localhost';  // Replace PAGE_URL with your page's canonical URL variable
+            //this.page.identifier = 'PAGE_IDENTIFIER'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            this.page.remote_auth_s3 = '<%= payload %>';
+            this.page.api_key = ''; // TODO enter your API public key
+        }
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/flexslider")
+    @Scripts.Render("~/bundles/rating")
+    @Scripts.Render("~/bundles/jsCookie")
+    @Scripts.Render("~/bundles/showCompany")
+}

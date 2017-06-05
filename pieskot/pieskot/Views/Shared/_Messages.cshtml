@@ -1,0 +1,41 @@
+﻿@using NaSpacerDo.App_Start;
+
+@if (TempData[Constants.Alerts.Error.ToString()] != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <p>
+            @Html.Raw(TempData[Constants.Alerts.Error.ToString()])
+        </p>
+    </div>
+}
+
+@if (TempData[Constants.Alerts.Warning.ToString()] != null)
+{
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <p>
+            @Html.Raw(TempData[Constants.Alerts.Warning.ToString()])
+        </p>
+    </div>
+}
+
+@if (TempData[Constants.Alerts.Success.ToString()] != null)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <p>
+            @Html.Raw(TempData[Constants.Alerts.Success.ToString()])
+        </p>
+    </div>
+}
+
+@if (TempData[Constants.Alerts.Info.ToString()] != null)
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <p>
+            @Html.Raw(TempData[Constants.Alerts.Info.ToString()])
+        </p>
+    </div>
+}

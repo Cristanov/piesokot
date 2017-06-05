@@ -1,0 +1,58 @@
+﻿@model NaSpacerDo.ViewModels.EditCompanyViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/dropzone")
+
+<h2>Edit</h2>
+
+<div class="container">
+
+    @using (Html.BeginForm("Edit", "Company", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.Company.Id, new { id = "company_id" })
+        @Html.HiddenFor(model => model.Company.CreationDate)
+        @Html.HiddenFor(model => model.Company.Address.Id);
+        @Html.HiddenFor(model => model.Company.Address.City.Id);
+        @Html.HiddenFor(model => model.Company.Logo.Id);
+        @Html.HiddenFor(model => model.Company.Logo.Path);
+        @Html.HiddenFor(model => model.Company.OwnerId);
+        @Html.HiddenFor(model => model.MaxFilesLimit, new { id= "max_files_limit" })
+
+        <div class="form-horizontal">
+            <h3>Dane</h3>
+            @Html.Partial("_CompanyEditData", Model)
+            <h3>Opis</h3>
+            @Html.Partial("_CompanyEditDescription", Model)
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" id="save_company" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        <h3>Galeria</h3>
+        @using (Html.BeginForm("AddImage", "Company", new { companyId = Model.Company.Id }, FormMethod.Post, new { @class = "dropzone", id = "dropzoneForm" }))
+        { }
+        <p id="max_files_limit_message">Osiągnąłeś limit zdjęć</p>
+        @*<form action="AddImages" class="dropzone" id="dropzone-form"></form>*@
+        @*<div id="dropzone"></div>*@
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dropzone")
+    @Scripts.Render("~/bundles/editCompany")
+}
